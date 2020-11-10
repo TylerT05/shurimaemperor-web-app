@@ -1,13 +1,32 @@
-import logo from "./logo.svg";
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import HomePage from "./pages/HomePage";
+import AboutPage from "./pages/AboutPage";
+import ContactPage from "./pages/ContactPage";
+import SummonerPage from "./pages/SummonerPage";
+import MatchDetailPage from "./pages/MatchDetailPage";
+import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>Edit and save to reload.</p>
-      </header>
-    </div>
+    <Router>
+      <div className="App">
+        <div id="page-body">
+          <Switch>
+            <Route path="/" component={HomePage} exact />
+            <Route path="/about" component={AboutPage} />
+            <Route path="/contact" component={ContactPage} />
+            <Route path="/summonerdetail/:name" component={SummonerPage} />
+            <Route
+              path="/matchdetail/:name/:matchId"
+              component={MatchDetailPage}
+            />
+            <Route component={NotFoundPage} />
+          </Switch>
+        </div>
+      </div>
+    </Router>
   );
 }
 

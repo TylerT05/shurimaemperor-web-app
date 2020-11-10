@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/6f138fbb-dfc3-459d-a9c8-9030065ec154/resourceGroups/SEResourceGroup/providers/Microsoft.Web/sites/ShurimaEmperorWebApp",
+    "appService.deploySubpath": "."
+}
