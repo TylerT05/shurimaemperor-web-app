@@ -12,6 +12,7 @@ export default class AboutPage extends Component {
     this.state = {
       summonerName: "",
       error: "",
+      disableSearchButton: false,
     };
   }
 
@@ -38,8 +39,13 @@ export default class AboutPage extends Component {
     });
   }
 
-  onSearch() {
+  onSearch(event) {
+    event.preventDefault();
     const { history } = this.props;
+
+    this.setState({
+      disableSearchButton: true,
+    });
 
     if (this.state.summonerName !== "") {
       fetch(
@@ -53,12 +59,14 @@ export default class AboutPage extends Component {
           } else {
             this.setState({
               error: "Summoner name does not match any record!",
+              disableSearchButton: false,
             });
           }
         });
     } else {
       this.setState({
         error: "Please enter a summoner name!",
+        disableSearchButton: false,
       });
     }
   }
@@ -106,21 +114,47 @@ export default class AboutPage extends Component {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <div className="input-group border border-dark rounded">
-                  <input
-                    type="text"
-                    value={this.state.summonerName}
-                    placeholder="Enter a summoner name..."
-                    className="form-control border-0"
-                    onChange={this.onChangeSearch}
-                    style={{ width: 400 }}
-                  />
-                  <div className="input-group-append">
-                    <button className="btn btn-light" onClick={this.onSearch}>
-                      <FaSearch />
-                    </button>
+                <form
+                  className="form-inline justify-content-left"
+                  onSubmit={this.onSearch}
+                >
+                  <select class=" form-control custom-select" id="sel1">
+                    <option value="NA">NA</option>
+                    <option value="KR">KR</option>
+                    <option value="EUW">EUW</option>
+                    <option value="EUNE">EUNE</option>
+                    <option value="JP">JP</option>
+                    <option value="BR">BR</option>
+                    <option value="LAN">LAN</option>
+                    <option value="LAS">LAS</option>
+                    <option value="OCE">OCE</option>
+                    <option value="RU">RU</option>
+                    <option value="TR">TR</option>
+                  </select>
+                  <div
+                    className="input-group border border-dark rounded"
+                    style={{
+                      width: 400,
+                    }}
+                  >
+                    <input
+                      value={this.state.summonerName}
+                      placeholder="Enter a summoner name..."
+                      type="text"
+                      className="form-control"
+                      onChange={this.onChangeSearch}
+                    />
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-light"
+                        type="submit"
+                        disabled={this.state.disableSearchButton}
+                      >
+                        <FaSearch />
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </form>
                 <p className="text-danger" style={{ marginBottom: 0 }}>
                   {this.state.error}
                 </p>

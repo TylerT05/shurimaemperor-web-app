@@ -4,6 +4,7 @@ import EntryList from "../components/EntryList";
 import BasicInfo from "../components/SummonerBasicInfo";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import load from "../load01.gif";
 
 export default class SummonerPage extends Component {
   constructor(props) {
@@ -21,6 +22,9 @@ export default class SummonerPage extends Component {
       error: "",
       index: 10,
       matches: [],
+      disableSearchButton: false,
+      loadingMoreMatch: false,
+      loadingPage: true,
     };
   }
 
@@ -36,6 +40,8 @@ export default class SummonerPage extends Component {
           summonerInfo: result,
           leagueEntries: result.leagueEntries,
           matches: result.matchOveralls,
+          loadingMoreMatch: false,
+          loadingPage: false,
         });
       });
   }
@@ -49,13 +55,15 @@ export default class SummonerPage extends Component {
         .then((result) => {
           this.setState({
             matches: this.state.matches.concat(result.matchOveralls),
+            loadingMoreMatch: false,
           });
         });
     }
   }
 
-  loadMoreMatches() {
+  loadMoreMatches(e) {
     this.setState({
+      loadingMoreMatch: true,
       index: this.state.index + 10,
     });
   }
@@ -67,8 +75,13 @@ export default class SummonerPage extends Component {
     });
   }
 
-  onSearch() {
+  onSearch(event) {
+    event.preventDefault();
     const { history } = this.props;
+
+    this.setState({
+      disableSearchButton: true,
+    });
 
     if (this.state.summonerName !== "") {
       fetch(
@@ -82,12 +95,14 @@ export default class SummonerPage extends Component {
           } else {
             this.setState({
               error: "Summoner name does not match any record!",
+              disableSearchButton: false,
             });
           }
         });
     } else {
       this.setState({
         error: "Please enter a summoner name!",
+        disableSearchButton: false,
       });
     }
   }
@@ -135,21 +150,47 @@ export default class SummonerPage extends Component {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <div className="input-group border border-dark rounded">
-                  <input
-                    type="text"
-                    value={this.state.summonerName}
-                    placeholder="Enter a summoner name..."
-                    className="form-control border-0"
-                    onChange={this.onChangeSearch}
-                    style={{ width: 400 }}
-                  />
-                  <div className="input-group-append">
-                    <button className="btn btn-light" onClick={this.onSearch}>
-                      <FaSearch />
-                    </button>
+                <form
+                  className="form-inline justify-content-left"
+                  onSubmit={this.onSearch}
+                >
+                  <select class=" form-control custom-select" id="sel1">
+                    <option value="NA">NA</option>
+                    <option value="KR">KR</option>
+                    <option value="EUW">EUW</option>
+                    <option value="EUNE">EUNE</option>
+                    <option value="JP">JP</option>
+                    <option value="BR">BR</option>
+                    <option value="LAN">LAN</option>
+                    <option value="LAS">LAS</option>
+                    <option value="OCE">OCE</option>
+                    <option value="RU">RU</option>
+                    <option value="TR">TR</option>
+                  </select>
+                  <div
+                    className="input-group border border-dark rounded"
+                    style={{
+                      width: 400,
+                    }}
+                  >
+                    <input
+                      value={this.state.summonerName}
+                      placeholder="Enter a summoner name..."
+                      type="text"
+                      className="form-control"
+                      onChange={this.onChangeSearch}
+                    />
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-light"
+                        type="submit"
+                        disabled={this.state.disableSearchButton}
+                      >
+                        <FaSearch />
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </form>
                 <p className="text-danger" style={{ marginBottom: 0 }}>
                   {this.state.error}
                 </p>
@@ -157,36 +198,56 @@ export default class SummonerPage extends Component {
             </ul>
           </nav>
         </div>
-        <div
-          className="container"
-          style={{ opacity: 0.9, marginTop: 60, marginBottom: 60 }}
-        >
-          <div className="row">
-            <div className="col-md-6">
-              <BasicInfo info={this.state.summonerInfo} />
+        {this.state.loadingPage ? (
+          <div
+            style={{
+              marginTop: "20%",
+            }}
+          >
+            <img src={"/img/global/load01.gif"} alt="loading..." />
+          </div>
+        ) : (
+          <div
+            className="container"
+            style={{ opacity: 0.9, marginTop: 60, marginBottom: 60 }}
+          >
+            <div className="row">
+              <div className="col-md-6">
+                <BasicInfo info={this.state.summonerInfo} />
+              </div>
+              <div className="col-md-6">
+                {this.state.leagueEntries && this.state.leagueEntries.length ? (
+                  <EntryList entries={this.state.leagueEntries} />
+                ) : (
+                  <EntryList entries={null} />
+                )}
+              </div>
             </div>
-            <div className="col-md-6">
-              {this.state.leagueEntries && this.state.leagueEntries.length ? (
-                <EntryList entries={this.state.leagueEntries} />
+            <div>
+              <MatchList
+                basicInfo={this.state.summonerInfo}
+                matches={this.state.matches}
+              />
+              {this.state.loadingMoreMatch ? (
+                <button
+                  className="btn btn-dark"
+                  style={{ width: 100 }}
+                  disabled={this.state.loadingMoreMatch}
+                >
+                  <img src={"/img/global/load01.gif"} alt="loading..." />
+                </button>
               ) : (
-                <EntryList entries={null} />
+                <button
+                  className="btn btn-dark"
+                  onClick={this.loadMoreMatches}
+                  disabled={this.state.loadingMoreMatch}
+                >
+                  Load more
+                </button>
               )}
             </div>
           </div>
-          <div>
-            <MatchList
-              basicInfo={this.state.summonerInfo}
-              matches={this.state.matches}
-            />
-            <div
-              className="btn btn-dark"
-              style={{ width: "100%" }}
-              onClick={this.loadMoreMatches}
-            >
-              Load more
-            </div>
-          </div>
-        </div>
+        )}
       </div>
     );
   }

@@ -21,6 +21,8 @@ export default class MatchDetailPage extends Component {
       participantsTeam2: [],
       bans: [],
       error: "",
+      disableSearchButton: false,
+      loadingPage: true,
     };
   }
 
@@ -39,11 +41,10 @@ export default class MatchDetailPage extends Component {
         this.setState({
           summonerBasicInfo: result,
         });
-      });
-
-    fetch(
-      `https://shurimaemperorapimatches.azurewebsites.net/api/matches/${params.matchId}`
-    )
+        return fetch(
+          `https://shurimaemperorapimatches.azurewebsites.net/api/matches/${params.matchId}`
+        );
+      })
       .then((res) => res.json())
       .then((result) => {
         this.setState({
@@ -57,6 +58,7 @@ export default class MatchDetailPage extends Component {
           participantsTeam2: result.participants.filter(
             (p) => p.teamId === 200
           ),
+          loadingPage: false,
         });
       });
   }
@@ -68,8 +70,13 @@ export default class MatchDetailPage extends Component {
     });
   }
 
-  onSearch() {
+  onSearch(event) {
+    event.preventDefault();
     const { history } = this.props;
+
+    this.setState({
+      disableSearchButton: true,
+    });
 
     if (this.state.summonerName !== "") {
       fetch(
@@ -82,12 +89,14 @@ export default class MatchDetailPage extends Component {
           } else {
             this.setState({
               error: "Summoner name does not match any record!",
+              disableSearchButton: false,
             });
           }
         });
     } else {
       this.setState({
         error: "Please enter a summoner name!",
+        disableSearchButton: false,
       });
     }
   }
@@ -135,21 +144,47 @@ export default class MatchDetailPage extends Component {
             </ul>
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <div className="input-group border border-dark rounded">
-                  <input
-                    type="text"
-                    value={this.state.summonerName}
-                    placeholder="Enter a summoner name..."
-                    className="form-control border-0"
-                    onChange={this.onChangeSearch}
-                    style={{ width: 400 }}
-                  />
-                  <div className="input-group-append">
-                    <button className="btn btn-light" onClick={this.onSearch}>
-                      <FaSearch />
-                    </button>
+                <form
+                  className="form-inline justify-content-left"
+                  onSubmit={this.onSearch}
+                >
+                  <select class=" form-control custom-select" id="sel1">
+                    <option value="NA">NA</option>
+                    <option value="KR">KR</option>
+                    <option value="EUW">EUW</option>
+                    <option value="EUNE">EUNE</option>
+                    <option value="JP">JP</option>
+                    <option value="BR">BR</option>
+                    <option value="LAN">LAN</option>
+                    <option value="LAS">LAS</option>
+                    <option value="OCE">OCE</option>
+                    <option value="RU">RU</option>
+                    <option value="TR">TR</option>
+                  </select>
+                  <div
+                    className="input-group border border-dark rounded"
+                    style={{
+                      width: 400,
+                    }}
+                  >
+                    <input
+                      value={this.state.summonerName}
+                      placeholder="Enter a summoner name..."
+                      type="text"
+                      className="form-control"
+                      onChange={this.onChangeSearch}
+                    />
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-light"
+                        type="submit"
+                        disabled={this.state.disableSearchButton}
+                      >
+                        <FaSearch />
+                      </button>
+                    </div>
                   </div>
-                </div>
+                </form>
                 <p className="text-danger" style={{ marginBottom: 0 }}>
                   {this.state.error}
                 </p>
@@ -157,24 +192,34 @@ export default class MatchDetailPage extends Component {
             </ul>
           </nav>
         </div>
-        <div
-          className="container"
-          style={{ opacity: 0.9, marginTop: 60, marginBottom: 40 }}
-        >
-          <MatchBasicInfo
-            match={this.state.match}
-            participants={this.state.participants}
-            summonerBasicInfo={this.state.summonerBasicInfo}
-          />
-          <MatchDetail
-            summonerBasicInfo={this.state.summonerBasicInfo}
-            match={this.state.match}
-            bans={this.state.bans}
-            teams={this.state.teams}
-            participantsTeam1={this.state.participantsTeam1}
-            participantsTeam2={this.state.participantsTeam2}
-          />
-        </div>
+        {this.state.loadingPage ? (
+          <div
+            style={{
+              marginTop: "20%",
+            }}
+          >
+            <img src={"/img/global/load01.gif"} alt="loading..." />
+          </div>
+        ) : (
+          <div
+            className="container"
+            style={{ opacity: 0.9, marginTop: 60, marginBottom: 40 }}
+          >
+            <MatchBasicInfo
+              match={this.state.match}
+              participants={this.state.participants}
+              summonerBasicInfo={this.state.summonerBasicInfo}
+            />
+            <MatchDetail
+              summonerBasicInfo={this.state.summonerBasicInfo}
+              match={this.state.match}
+              bans={this.state.bans}
+              teams={this.state.teams}
+              participantsTeam1={this.state.participantsTeam1}
+              participantsTeam2={this.state.participantsTeam2}
+            />
+          </div>
+        )}
       </div>
     );
   }

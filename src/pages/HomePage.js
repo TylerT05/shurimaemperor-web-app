@@ -12,6 +12,7 @@ export default class HomePage extends Component {
     this.state = {
       summonerName: "",
       error: "",
+      disableSearchButton: false,
     };
   }
 
@@ -22,8 +23,13 @@ export default class HomePage extends Component {
     });
   }
 
-  onSearch() {
+  onSearch(event) {
+    event.preventDefault();
     const { history } = this.props;
+
+    this.setState({
+      disableSearchButton: true,
+    });
 
     if (this.state.summonerName !== "") {
       fetch(
@@ -39,12 +45,14 @@ export default class HomePage extends Component {
           } else {
             this.setState({
               error: "Summoner name does not match any record!",
+              disableSearchButton: false,
             });
           }
         });
     } else {
       this.setState({
         error: "Please enter a summoner name!",
+        disableSearchButton: false,
       });
     }
   }
@@ -54,10 +62,7 @@ export default class HomePage extends Component {
       <div>
         <div>
           <nav className="navbar navbar-expand-md bg-dark navbar-dark">
-            <Link
-              className="nav-brand border-right border-secondary"
-              onClick={this.refresh}
-            >
+            <Link className="nav-brand border-right border-secondary" to="/">
               <img
                 style={{ marginRight: 14, width: 60 }}
                 src={"/shurima_logo.png"}
@@ -100,7 +105,7 @@ export default class HomePage extends Component {
             className="shadow bg-dark card"
             style={{
               opacity: 0.9,
-              height: 680,
+              height: 740,
               marginTop: 10,
               marginBottom: 10,
             }}
@@ -117,30 +122,56 @@ export default class HomePage extends Component {
             />
 
             <div style={{ marginBottom: 80 }}>
-              <div style={{ height: 60 }}>
-                <div
-                  className="input-group border border-dark rounded"
+              <div style={{ height: 100 }}>
+                <form
+                  className="form-inline justify-content-center"
                   style={{
                     marginTop: 100,
                     marginBottom: 10,
-                    width: 400,
-                    marginLeft: "auto",
-                    marginRight: "auto",
                   }}
+                  onSubmit={this.onSearch}
                 >
-                  <input
-                    value={this.state.summonerName}
-                    placeholder="Enter a summoner name..."
-                    type="text"
-                    className="form-control"
-                    onChange={this.onChangeSearch}
-                  />
-                  <div className="input-group-append">
-                    <button className="btn btn-light" onClick={this.onSearch}>
-                      <FaSearch />
-                    </button>
+                  <select class=" form-control custom-select" id="sel1">
+                    <option value="NA">North America</option>
+                    <option value="KR">Korea</option>
+                    <option value="EUW">Europe West</option>
+                    <option value="EUNE">EU North &amp; East</option>
+                    <option value="JP">Japan</option>
+                    <option value="BR">Brazil</option>
+                    <option value="LAN">Latin America North</option>
+                    <option value="LAS">Latin America South</option>
+                    <option value="OCE">Oceania</option>
+                    <option value="RU">Russia</option>
+                    <option value="TR">Turkey</option>
+                  </select>
+                  <div
+                    className="input-group border border-dark rounded"
+                    style={{
+                      width: 600,
+                    }}
+                  >
+                    <input
+                      value={this.state.summonerName}
+                      placeholder="Enter a summoner name..."
+                      type="text"
+                      className="form-control"
+                      onChange={this.onChangeSearch}
+                    />
+                    <div className="input-group-append">
+                      <button
+                        className="btn btn-light"
+                        type="submit"
+                        disabled={this.state.disableSearchButton}
+                      >
+                        <FaSearch />
+                      </button>
+                    </div>
                   </div>
-                </div>
+                  <p className="text-warning">
+                    Summoner Name is case sensitive. Make sure you enter it
+                    correctly.
+                  </p>
+                </form>
                 <p className="text-danger">{this.state.error}</p>
               </div>
 
