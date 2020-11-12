@@ -5,9 +5,9 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-image: url("./Azir_0.jpg");
+  /* background-image: url("./Azir_0.jpg");
   background-blend-mode: multiply;
-  background-size: 100%;
+  background-size: 100%; */
 }
 
 code {

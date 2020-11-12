@@ -10,6 +10,7 @@ const MatchDetail = ({
   match,
   participantsTeam1,
   participantsTeam2,
+  server,
 }) => (
   <div
     className="shadow bg-dark card"
@@ -58,6 +59,7 @@ const MatchDetail = ({
             gameDuration={match.gameDuration}
             participantsTeam1={participantsTeam1}
             participantsTeam2={participantsTeam2}
+            server={server}
           />
         </div>
         <div id="advancedstats" class="container tab-pane fade">

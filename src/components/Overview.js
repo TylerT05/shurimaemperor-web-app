@@ -8,6 +8,7 @@ const TeamInfo = ({
   participantsTeam2,
   gameDuration,
   largestDamageDealtToChampions,
+  server,
 }) =>
   teams.map((t) => (
     <table className="card-text table table-dark table-striped small">
@@ -80,6 +81,7 @@ const TeamInfo = ({
             participants={participantsTeam1}
             gameDuration={gameDuration}
             largestDamageDealtToChampions={largestDamageDealtToChampions}
+            server={server}
           />
         ) : (
           <ParticipantList
@@ -87,6 +89,7 @@ const TeamInfo = ({
             participants={participantsTeam2}
             gameDuration={gameDuration}
             largestDamageDealtToChampions={largestDamageDealtToChampions}
+            server={server}
           />
         )}
       </tbody>

@@ -9,6 +9,7 @@ const ParticipantList = ({
   participants,
   gameDuration,
   largestDamageDealtToChampions,
+  server,
 }) =>
   participants.map((p, key) => (
     <tr>
@@ -108,7 +109,7 @@ const ParticipantList = ({
           <div className="col-2 text-left">
             <Link
               className="text-white"
-              to={`/summonerdetail/${p.summonerName}`}
+              to={`/${server}/summonerdetail/${p.summonerName}`}
             >
               {p.summonerName}
             </Link>

@@ -1,5 +1,6 @@
 import React from "react";
 import champions from "../data/en_US/championFull.json";
+import { FaCheck } from "react-icons/fa";
 
 const AdvancedStats = ({
   name,
@@ -67,7 +68,7 @@ const AdvancedStats = ({
       <tr>
         <td className="text-left">KDA</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.kills}/{p.stats.deaths}/{p.stats.assists}
@@ -77,10 +78,10 @@ const AdvancedStats = ({
                 {p.stats.kills}/{p.stats.deaths}/{p.stats.assists}
               </p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.kills}/{p.stats.deaths}/{p.stats.assists}
@@ -90,63 +91,79 @@ const AdvancedStats = ({
                 {p.stats.kills}/{p.stats.deaths}/{p.stats.assists}
               </p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Largest Killing Spree</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.largestKillingSpree}</p>
             ) : (
               <p>{p.stats.largestKillingSpree}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.largestKillingSpree}</p>
             ) : (
               <p>{p.stats.largestKillingSpree}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Largest Multi Kill</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.largestMultiKill}</p>
             ) : (
               <p>{p.stats.largestMultiKill}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.largestMultiKill}</p>
             ) : (
               <p>{p.stats.largestMultiKill}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">First Blood Kill</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
-        <td>a</td>
+        {participantsTeam1.map((p) => (
+          <td>
+            {p.stats.firstBloodKill ? (
+              p.summonerName === name ? (
+                <FaCheck className="text-warning"></FaCheck>
+              ) : (
+                <FaCheck></FaCheck>
+              )
+            ) : (
+              ""
+            )}
+          </td>
+        ))}
+        {participantsTeam2.map((p) => (
+          <td>
+            {p.stats.firstBloodKill ? (
+              p.summonerName === name ? (
+                <FaCheck className="text-warning"></FaCheck>
+              ) : (
+                <FaCheck></FaCheck>
+              )
+            ) : (
+              ""
+            )}
+          </td>
+        ))}
       </tr>
     </tbody>
     <thead>
@@ -158,7 +175,7 @@ const AdvancedStats = ({
       <tr>
         <td className="text-left">Total Dmg To Champions</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalDamageDealtToChampions.toLocaleString()}
@@ -166,10 +183,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalDamageDealtToChampions.toLocaleString()}
@@ -177,13 +194,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Physical Dmg To Champions</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.physicalDamageDealtToChampions.toLocaleString()}
@@ -191,10 +208,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.physicalDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.physicalDamageDealtToChampions.toLocaleString()}
@@ -202,13 +219,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.physicalDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Magic Dmg To Champions</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.magicDamageDealtToChampions.toLocaleString()}
@@ -216,10 +233,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.magicDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.magicDamageDealtToChampions.toLocaleString()}
@@ -227,13 +244,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.magicDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">True Dmg To Champions</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.trueDamageDealtToChampions.toLocaleString()}
@@ -241,10 +258,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.trueDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.trueDamageDealtToChampions.toLocaleString()}
@@ -252,13 +269,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.trueDamageDealtToChampions.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Total Dmg</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalDamageDealt.toLocaleString()}
@@ -266,10 +283,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalDamageDealt.toLocaleString()}
@@ -277,13 +294,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Physical Dmg</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.physicalDamageDealt.toLocaleString()}
@@ -291,10 +308,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.physicalDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.physicalDamageDealt.toLocaleString()}
@@ -302,13 +319,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.physicalDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Magic Dmg</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.magicDamageDealt.toLocaleString()}
@@ -316,10 +333,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.magicDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.magicDamageDealt.toLocaleString()}
@@ -327,13 +344,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.magicDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">True Dmg</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.trueDamageDealt.toLocaleString()}
@@ -341,10 +358,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.trueDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.trueDamageDealt.toLocaleString()}
@@ -352,13 +369,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.trueDamageDealt.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Largest Critical Strike</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.largestCriticalStrike.toLocaleString()}
@@ -366,10 +383,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.largestCriticalStrike.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.largestCriticalStrike.toLocaleString()}
@@ -377,13 +394,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.largestCriticalStrike.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Total Dmg To Objectives</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.damageDealtToObjectives.toLocaleString()}
@@ -391,10 +408,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.damageDealtToObjectives.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.damageDealtToObjectives.toLocaleString()}
@@ -402,13 +419,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.damageDealtToObjectives.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Total Dmg To Turrets</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.damageDealtToTurrets.toLocaleString()}
@@ -416,10 +433,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.damageDealtToTurrets.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.damageDealtToTurrets.toLocaleString()}
@@ -427,7 +444,7 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.damageDealtToTurrets.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
     </tbody>
@@ -440,7 +457,7 @@ const AdvancedStats = ({
       <tr>
         <td className="text-left">Dmg Healed</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalHeal.toLocaleString()}
@@ -448,10 +465,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalHeal.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalHeal.toLocaleString()}
@@ -459,13 +476,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalHeal.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Dmg Taken</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalDamageTaken.toLocaleString()}
@@ -473,10 +490,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.totalDamageTaken.toLocaleString()}
@@ -484,13 +501,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.totalDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Physical Dmg Taken</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.physicalDamageTaken.toLocaleString()}
@@ -498,10 +515,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.physicalDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.physicalDamageTaken.toLocaleString()}
@@ -509,13 +526,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.physicalDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Magic Dmg Taken</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.magicalDamageTaken.toLocaleString()}
@@ -523,10 +540,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.magicalDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.magicalDamageTaken.toLocaleString()}
@@ -534,13 +551,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.magicalDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">True Dmg Taken</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.trueDamageTaken.toLocaleString()}
@@ -548,10 +565,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.trueDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.trueDamageTaken.toLocaleString()}
@@ -559,13 +576,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.trueDamageTaken.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Self Mitigated Dmg</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.damageSelfMitigated.toLocaleString()}
@@ -573,10 +590,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.damageSelfMitigated.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.damageSelfMitigated.toLocaleString()}
@@ -584,7 +601,7 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.damageSelfMitigated.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
     </tbody>
@@ -597,85 +614,85 @@ const AdvancedStats = ({
       <tr>
         <td className="text-left">Vision Score</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.visionScore}</p>
             ) : (
               <p>{p.stats.visionScore}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.visionScore}</p>
             ) : (
               <p>{p.stats.visionScore}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Wards Placed</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.wardsPlaced}</p>
             ) : (
               <p>{p.stats.wardsPlaced}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.wardsPlaced}</p>
             ) : (
               <p>{p.stats.wardsPlaced}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Wards Destroyed</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.wardsKilled}</p>
             ) : (
               <p>{p.stats.wardsKilled}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.wardsKilled}</p>
             ) : (
               <p>{p.stats.wardsKilled}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Control Wards Purchased</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.visionWardsBoughtInGame}</p>
             ) : (
               <p>{p.stats.visionWardsBoughtInGame}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.visionWardsBoughtInGame}</p>
             ) : (
               <p>{p.stats.visionWardsBoughtInGame}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
     </tbody>
@@ -688,7 +705,7 @@ const AdvancedStats = ({
       <tr>
         <td className="text-left">Gold Earned</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.goldEarned.toLocaleString()}
@@ -696,10 +713,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.goldEarned.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.goldEarned.toLocaleString()}
@@ -707,13 +724,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.goldEarned.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Gold Spent</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.goldSpent.toLocaleString()}
@@ -721,10 +738,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.goldSpent.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.goldSpent.toLocaleString()}
@@ -732,55 +749,55 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.goldSpent.toLocaleString()}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Minions Killed</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.totalMinionsKilled}</p>
             ) : (
               <p>{p.stats.totalMinionsKilled}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.totalMinionsKilled}</p>
             ) : (
               <p>{p.stats.totalMinionsKilled}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Neutral Minions Killed (NMK)</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.neutralMinionsKilled}</p>
             ) : (
               <p>{p.stats.neutralMinionsKilled}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.neutralMinionsKilled}</p>
             ) : (
               <p>{p.stats.neutralMinionsKilled}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">NMK in Team Jng</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.neutralMinionsKilledTeamJungle}
@@ -788,10 +805,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.neutralMinionsKilledTeamJungle}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.neutralMinionsKilledTeamJungle}
@@ -799,13 +816,13 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.neutralMinionsKilledTeamJungle}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">NMK in Enemy Jng</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.neutralMinionsKilledEnemyJungle}
@@ -813,10 +830,10 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.neutralMinionsKilledEnemyJungle}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">
                 {p.stats.neutralMinionsKilledEnemyJungle}
@@ -824,7 +841,7 @@ const AdvancedStats = ({
             ) : (
               <p>{p.stats.neutralMinionsKilledEnemyJungle}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
     </tbody>
@@ -837,43 +854,43 @@ const AdvancedStats = ({
       <tr>
         <td className="text-left">Towers Destroyed</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.turretKills}</p>
             ) : (
               <p>{p.stats.turretKills}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.turretKills}</p>
             ) : (
               <p>{p.stats.turretKills}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
       <tr>
         <td className="text-left">Inhibitors Destroyed</td>
         {participantsTeam1.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.inhibitorKills}</p>
             ) : (
               <p>{p.stats.inhibitorKills}</p>
             )}
-          </th>
+          </td>
         ))}
         {participantsTeam2.map((p) => (
-          <th>
+          <td>
             {p.summonerName === name ? (
               <p className="text-warning">{p.stats.inhibitorKills}</p>
             ) : (
               <p>{p.stats.inhibitorKills}</p>
             )}
-          </th>
+          </td>
         ))}
       </tr>
     </tbody>
