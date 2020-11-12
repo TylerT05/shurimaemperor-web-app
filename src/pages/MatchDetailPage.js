@@ -8,11 +8,12 @@ export default class MatchDetailPage extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeSearch = this.onChangeSearch.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.onSearch = this.onSearch.bind(this);
 
     this.state = {
       summonerName: "",
+      summonerServer: "",
       summonerBasicInfo: [],
       match: [],
       teams: [],
@@ -21,6 +22,7 @@ export default class MatchDetailPage extends Component {
       participantsTeam2: [],
       bans: [],
       error: "",
+      server: "na1",
       disableSearchButton: false,
       loadingPage: true,
     };
@@ -31,10 +33,11 @@ export default class MatchDetailPage extends Component {
     this.setState({
       name: params.name,
       matchId: params.matchId,
+      summonerServer: params.server,
     });
 
     fetch(
-      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/by-name/${params.name}?index=10`
+      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -42,7 +45,7 @@ export default class MatchDetailPage extends Component {
           summonerBasicInfo: result,
         });
         return fetch(
-          `https://shurimaemperorapimatches.azurewebsites.net/api/matches/${params.matchId}`
+          `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
         );
       })
       .then((res) => res.json())
@@ -63,9 +66,9 @@ export default class MatchDetailPage extends Component {
       });
   }
 
-  onChangeSearch(e) {
+  onChange(e) {
     this.setState({
-      summonerName: e.target.value,
+      [e.target.name]: e.target.value,
       error: "",
     });
   }
@@ -80,12 +83,14 @@ export default class MatchDetailPage extends Component {
 
     if (this.state.summonerName !== "") {
       fetch(
-        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/verify-by-name/${this.state.summonerName}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {
           if (result === true) {
-            history.push(`/summonerdetail/${this.state.summonerName}`);
+            history.push(
+              `/${this.state.server}/summonerdetail/${this.state.summonerName}`
+            );
           } else {
             this.setState({
               error: "Summoner name does not match any record!",
@@ -148,18 +153,25 @@ export default class MatchDetailPage extends Component {
                   className="form-inline justify-content-left"
                   onSubmit={this.onSearch}
                 >
-                  <select class=" form-control custom-select" id="sel1">
-                    <option value="NA">NA</option>
-                    <option value="KR">KR</option>
-                    <option value="EUW">EUW</option>
-                    <option value="EUNE">EUNE</option>
-                    <option value="JP">JP</option>
-                    <option value="BR">BR</option>
-                    <option value="LAN">LAN</option>
-                    <option value="LAS">LAS</option>
-                    <option value="OCE">OCE</option>
-                    <option value="RU">RU</option>
-                    <option value="TR">TR</option>
+                  <select
+                    class=" form-control custom-select"
+                    name="server"
+                    value={this.state.server}
+                    onChange={this.onChange}
+                    id="sel1"
+                  >
+                    <option disabled>Select a server</option>
+                    <option value="na1">NA</option>
+                    <option value="kr">KR</option>
+                    <option value="euw1">EUW</option>
+                    <option value="eun1">EUNE</option>
+                    <option value="jp1">JP</option>
+                    <option value="br1">BR</option>
+                    <option value="la1">LAN</option>
+                    <option value="la2">LAS</option>
+                    <option value="oc1">OCE</option>
+                    <option value="ru">RU</option>
+                    <option value="tr1">TR</option>
                   </select>
                   <div
                     className="input-group border border-dark rounded"
@@ -170,9 +182,10 @@ export default class MatchDetailPage extends Component {
                     <input
                       value={this.state.summonerName}
                       placeholder="Enter a summoner name..."
+                      name="summonerName"
                       type="text"
                       className="form-control"
-                      onChange={this.onChangeSearch}
+                      onChange={this.onChange}
                     />
                     <div className="input-group-append">
                       <button
@@ -209,6 +222,7 @@ export default class MatchDetailPage extends Component {
               match={this.state.match}
               participants={this.state.participants}
               summonerBasicInfo={this.state.summonerBasicInfo}
+              server={this.state.summonerServer}
             />
             <MatchDetail
               summonerBasicInfo={this.state.summonerBasicInfo}

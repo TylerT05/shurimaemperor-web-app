@@ -17,9 +17,12 @@ function App() {
             <Route path="/" component={HomePage} exact />
             <Route path="/about" component={AboutPage} />
             <Route path="/contact" component={ContactPage} />
-            <Route path="/summonerdetail/:name" component={SummonerPage} />
             <Route
-              path="/matchdetail/:name/:matchId"
+              path="/:server/summonerdetail/:name"
+              component={SummonerPage}
+            />
+            <Route
+              path="/:server/matchdetail/:name/:matchId"
               component={MatchDetailPage}
             />
             <Route component={NotFoundPage} />

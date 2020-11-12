@@ -1,7 +1,7 @@
 import React from "react";
 import Moment from "moment";
 
-const SummonerBasicInfo = ({ info }) => (
+const SummonerBasicInfo = ({ info, server }) => (
   <div
     className="shadow bg-dark card"
     style={{
@@ -46,6 +46,32 @@ const SummonerBasicInfo = ({ info }) => (
           <h4 className="text-white text-left">{info.name}</h4>
           <p className="text-secondary text-left">
             Last played: {Moment(info.lastPlayed).fromNow()}
+          </p>
+          <p className="text-secondary text-left">
+            Server:{" "}
+            {server === "na1"
+              ? "North America"
+              : server === "kr"
+              ? "Korea"
+              : server === "euw1"
+              ? "Europe West"
+              : server === "eun1"
+              ? "EU Nordic & East"
+              : server === "jp1"
+              ? "Japan"
+              : server === "br1"
+              ? "Brazil"
+              : server === "la1"
+              ? "Latin America North"
+              : server === "la2"
+              ? "Latin America South"
+              : server === "oc1"
+              ? "Oceania"
+              : server === "ru"
+              ? "Russia"
+              : server === "tr1"
+              ? "Turkey"
+              : ""}
           </p>
         </div>
       </div>

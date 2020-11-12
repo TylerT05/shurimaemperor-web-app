@@ -4,22 +4,24 @@ import EntryList from "../components/EntryList";
 import BasicInfo from "../components/SummonerBasicInfo";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import load from "../load01.gif";
 
 export default class SummonerPage extends Component {
   constructor(props) {
     super(props);
 
-    this.onChangeSearch = this.onChangeSearch.bind(this);
+    this.onChange = this.onChange.bind(this);
     this.onSearch = this.onSearch.bind(this);
 
     this.loadMoreMatches = this.loadMoreMatches.bind(this);
 
     this.state = {
       summonerName: "",
+      summonerServer: "",
       summonerInfo: [],
       leagueEntries: [],
       error: "",
+      server: "na1",
+      totalMatches: 0,
       index: 10,
       matches: [],
       disableSearchButton: false,
@@ -29,15 +31,19 @@ export default class SummonerPage extends Component {
   }
 
   componentDidMount() {
-    const { name } = this.props.match.params;
+    const { params } = this.props.match;
+    this.setState({
+      summonerServer: params.server,
+    });
 
     fetch(
-      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/by-name/${name}?index=${this.state.index}`
+      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
     )
       .then((res) => res.json())
       .then((result) => {
         this.setState({
           summonerInfo: result,
+          totalMatches: result.matchList.totalGames,
           leagueEntries: result.leagueEntries,
           matches: result.matchOveralls,
           loadingMoreMatch: false,
@@ -49,7 +55,7 @@ export default class SummonerPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.index !== this.state.index) {
       fetch(
-        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/by-name/${this.state.summonerInfo.name}?index=${this.state.index}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -68,9 +74,9 @@ export default class SummonerPage extends Component {
     });
   }
 
-  onChangeSearch(e) {
+  onChange(e) {
     this.setState({
-      summonerName: e.target.value,
+      [e.target.name]: e.target.value,
       error: "",
     });
   }
@@ -85,12 +91,14 @@ export default class SummonerPage extends Component {
 
     if (this.state.summonerName !== "") {
       fetch(
-        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/verify-by-name/${this.state.summonerName}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {
           if (result === true) {
-            history.push(`/summonerDetail/${this.state.summonerName}`);
+            history.push(
+              `/${this.state.server}/summonerDetail/${this.state.summonerName}`
+            );
             window.location.reload(false);
           } else {
             this.setState({
@@ -154,18 +162,25 @@ export default class SummonerPage extends Component {
                   className="form-inline justify-content-left"
                   onSubmit={this.onSearch}
                 >
-                  <select class=" form-control custom-select" id="sel1">
-                    <option value="NA">NA</option>
-                    <option value="KR">KR</option>
-                    <option value="EUW">EUW</option>
-                    <option value="EUNE">EUNE</option>
-                    <option value="JP">JP</option>
-                    <option value="BR">BR</option>
-                    <option value="LAN">LAN</option>
-                    <option value="LAS">LAS</option>
-                    <option value="OCE">OCE</option>
-                    <option value="RU">RU</option>
-                    <option value="TR">TR</option>
+                  <select
+                    class=" form-control custom-select"
+                    name="server"
+                    value={this.state.server}
+                    onChange={this.onChange}
+                    id="sel1"
+                  >
+                    <option disabled>Select a server</option>
+                    <option value="na1">NA</option>
+                    <option value="kr">KR</option>
+                    <option value="euw1">EUW</option>
+                    <option value="eun1">EUNE</option>
+                    <option value="jp1">JP</option>
+                    <option value="br1">BR</option>
+                    <option value="la1">LAN</option>
+                    <option value="la2">LAS</option>
+                    <option value="oc1">OCE</option>
+                    <option value="ru">RU</option>
+                    <option value="tr1">TR</option>
                   </select>
                   <div
                     className="input-group border border-dark rounded"
@@ -176,9 +191,10 @@ export default class SummonerPage extends Component {
                     <input
                       value={this.state.summonerName}
                       placeholder="Enter a summoner name..."
+                      name="summonerName"
                       type="text"
                       className="form-control"
-                      onChange={this.onChangeSearch}
+                      onChange={this.onChange}
                     />
                     <div className="input-group-append">
                       <button
@@ -213,7 +229,10 @@ export default class SummonerPage extends Component {
           >
             <div className="row">
               <div className="col-md-6">
-                <BasicInfo info={this.state.summonerInfo} />
+                <BasicInfo
+                  info={this.state.summonerInfo}
+                  server={this.state.summonerServer}
+                />
               </div>
               <div className="col-md-6">
                 {this.state.leagueEntries && this.state.leagueEntries.length ? (
@@ -224,27 +243,46 @@ export default class SummonerPage extends Component {
               </div>
             </div>
             <div>
-              <MatchList
-                basicInfo={this.state.summonerInfo}
-                matches={this.state.matches}
-              />
-              {this.state.loadingMoreMatch ? (
-                <button
-                  className="btn btn-dark"
-                  style={{ width: 100 }}
-                  disabled={this.state.loadingMoreMatch}
-                >
-                  <img src={"/img/global/load01.gif"} alt="loading..." />
-                </button>
-              ) : (
-                <button
-                  className="btn btn-dark"
-                  onClick={this.loadMoreMatches}
-                  disabled={this.state.loadingMoreMatch}
-                >
-                  Load more
-                </button>
-              )}
+              <div
+                className="card shadow bg-dark"
+                style={{ marginTop: 10, marginBottom: 10 }}
+              >
+                <div className="card-header h4 border-0 text-white">
+                  Match History{" "}
+                  <span className="text-secondary">
+                    (last {this.state.index} played)
+                  </span>
+                </div>
+                <div className="card-body text-center">
+                  <MatchList
+                    basicInfo={this.state.summonerInfo}
+                    matches={this.state.matches}
+                    server={this.state.summonerServer}
+                  />
+                </div>
+                <div className="card-footer border-0">
+                  {this.state.loadingMoreMatch ? (
+                    <button
+                      className="btn btn-dark"
+                      style={{ width: 100 }}
+                      disabled={this.state.loadingMoreMatch}
+                    >
+                      <img src={"/img/global/load01.gif"} alt="loading..." />
+                    </button>
+                  ) : (
+                    <button
+                      className="btn border-light btn-dark"
+                      onClick={this.loadMoreMatches}
+                      disabled={this.state.loadingMoreMatch}
+                    >
+                      Load more{" "}
+                      <span className="text-secondary">
+                        ({this.state.totalMatches - this.state.index})
+                      </span>
+                    </button>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         )}

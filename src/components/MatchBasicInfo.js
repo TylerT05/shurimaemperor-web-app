@@ -2,7 +2,7 @@ import React from "react";
 import Moment from "moment";
 import queues from "../data/en_US/queues.json";
 
-const MatchBasicInfo = ({ summonerBasicInfo, participants, match }) => (
+const MatchBasicInfo = ({ summonerBasicInfo, participants, match, server }) => (
   <div className="container" style={{ marginBottom: 40 }}>
     <div className="shadow bg-dark card">
       <div className="card-body text-center">
@@ -136,6 +136,32 @@ const MatchBasicInfo = ({ summonerBasicInfo, participants, match }) => (
                         &bull;
                       </span>
                       {Moment(match.gameCreation).format("MM/DD/YYYY, h:mm a")}
+                      <span style={{ marginLeft: 10, marginRight: 10 }}>
+                        &bull;
+                      </span>
+                      {server === "na1"
+                        ? "North America"
+                        : server === "kr"
+                        ? "Korea"
+                        : server === "euw1"
+                        ? "Europe West"
+                        : server === "eun1"
+                        ? "EU Nordic & East"
+                        : server === "jp1"
+                        ? "Japan"
+                        : server === "br1"
+                        ? "Brazil"
+                        : server === "la1"
+                        ? "Latin America North"
+                        : server === "la2"
+                        ? "Latin America South"
+                        : server === "oc1"
+                        ? "Oceania"
+                        : server === "ru"
+                        ? "Russia"
+                        : server === "tr1"
+                        ? "Turkey"
+                        : ""}
                     </p>
                   ) : (
                     ""
