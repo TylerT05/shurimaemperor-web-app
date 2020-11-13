@@ -30,11 +30,6 @@ const SampleList = () => (
         <td>JUGKlNG</td>
         <td>Beanovich</td>
       </tr>
-      <tr>
-        <td>5fire</td>
-        <td>Korea</td>
-        <td>Europe West</td>
-      </tr>
     </tbody>
   </table>
 );
