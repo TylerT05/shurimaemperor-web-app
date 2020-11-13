@@ -112,7 +112,7 @@ export default class AboutPage extends Component {
                     id="sel1"
                     onChange={this.onChange}
                   >
-                    <option disabled>Select a server</option>
+                    <option disabled>Select a region</option>
                     <option value="na1">NA</option>
                     <option value="kr">KR</option>
                     <option value="euw1">EUW</option>

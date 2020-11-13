@@ -169,7 +169,7 @@ export default class SummonerPage extends Component {
                     onChange={this.onChange}
                     id="sel1"
                   >
-                    <option disabled>Select a server</option>
+                    <option disabled>Select a region</option>
                     <option value="na1">NA</option>
                     <option value="kr">KR</option>
                     <option value="euw1">EUW</option>

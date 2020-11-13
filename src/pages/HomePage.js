@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SampleList from "../components/SampleList";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -108,7 +109,7 @@ export default class HomePage extends Component {
             className="shadow bg-dark card"
             style={{
               opacity: 0.9,
-              height: 740,
+              height: 800,
               marginTop: 10,
               marginBottom: 10,
             }}
@@ -141,7 +142,7 @@ export default class HomePage extends Component {
                     value={this.state.server}
                     onChange={this.onChange}
                   >
-                    <option disabled>Select a server</option>
+                    <option disabled>Select a region</option>
                     <option value="na1">North America</option>
                     <option value="kr">Korea</option>
                     <option value="euw1">Europe West</option>
@@ -186,13 +187,15 @@ export default class HomePage extends Component {
                 <p className="text-danger">{this.state.error}</p>
               </div>
 
-              <div className="text-secondary" style={{ marginTop: 40 }}>
-                <p>Sample Summoner Names for North America (NA) server:</p>
-                <p>Mathgodpi</p>
-                <p>Vocal Warfare</p>
-                <p>TheCrankyCroc</p>
-                <p>SwarlieStinson</p>
-                <p>*All summoner names are real in game names.*</p>
+              <div
+                className="text-white"
+                style={{ margin: "auto", width: 600, marginTop: 40 }}
+              >
+                <p>Sample Summoner Names</p>
+                <SampleList></SampleList>
+                <p className="text-secondary">
+                  *All summoner names above are real for each region.*
+                </p>
               </div>
             </div>
           </div>
