@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import champions from "../data/en_US/championFull.json";
 import summoner from "../data/en_US/summoner.json";
 import allRunes from "../data/en_US/runesReforged.json";

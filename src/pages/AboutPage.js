@@ -35,6 +35,7 @@ export default class AboutPage extends Component {
     if (this.state.summonerName !== "") {
       fetch(
         `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        // `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {

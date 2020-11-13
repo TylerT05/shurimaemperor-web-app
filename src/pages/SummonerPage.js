@@ -37,8 +37,8 @@ export default class SummonerPage extends Component {
     });
 
     fetch(
-      // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
-      `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
+      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
+      // `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -56,8 +56,8 @@ export default class SummonerPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.index !== this.state.index) {
       fetch(
-        // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
-        `https://localhost:44355/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
+        // `https://localhost:44355/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -93,8 +93,8 @@ export default class SummonerPage extends Component {
 
     if (this.state.summonerName !== "") {
       fetch(
-        // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
-        `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        // `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {

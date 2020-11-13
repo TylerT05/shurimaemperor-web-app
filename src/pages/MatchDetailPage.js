@@ -37,8 +37,8 @@ export default class MatchDetailPage extends Component {
     });
 
     fetch(
-      // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
-      `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=10`
+      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
+      // `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=10`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -46,8 +46,8 @@ export default class MatchDetailPage extends Component {
           summonerBasicInfo: result,
         });
         return fetch(
-          // `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
-          `https://localhost:44303/api/${params.server}/matches/${params.matchId}`
+          `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
+          // `https://localhost:44303/api/${params.server}/matches/${params.matchId}`
         );
       })
       .then((res) => res.json())
@@ -85,8 +85,8 @@ export default class MatchDetailPage extends Component {
 
     if (this.state.summonerName !== "") {
       fetch(
-        // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
-        `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        // `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {
