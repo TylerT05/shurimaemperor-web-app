@@ -219,7 +219,7 @@ export default class MatchDetailPage extends Component {
         ) : (
           <div
             className="container"
-            style={{ opacity: 0.9, marginTop: 60, marginBottom: 40 }}
+            style={{ marginTop: 60, marginBottom: 40 }}
           >
             <MatchBasicInfo
               match={this.state.match}

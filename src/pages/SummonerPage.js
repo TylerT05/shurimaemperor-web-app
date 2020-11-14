@@ -228,7 +228,7 @@ export default class SummonerPage extends Component {
         ) : (
           <div
             className="container"
-            style={{ opacity: 0.9, marginTop: 60, marginBottom: 60 }}
+            style={{ marginTop: 60, marginBottom: 60 }}
           >
             <div className="row">
               <div className="col-md-6">

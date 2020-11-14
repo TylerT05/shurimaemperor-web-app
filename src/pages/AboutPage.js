@@ -162,7 +162,6 @@ export default class AboutPage extends Component {
           <div
             className="shadow bg-dark card"
             style={{
-              opacity: 0.9,
               marginTop: 10,
               marginBottom: 10,
             }}

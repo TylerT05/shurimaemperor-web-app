@@ -109,7 +109,6 @@ export default class HomePage extends Component {
           <div
             className="shadow bg-dark card"
             style={{
-              opacity: 0.9,
               height: 800,
               marginTop: 10,
               marginBottom: 10,
