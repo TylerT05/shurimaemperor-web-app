@@ -22,7 +22,7 @@ export default class MatchDetailPage extends Component {
       participantsTeam2: [],
       bans: [],
       error: "",
-      server: "na1",
+      server: "",
       disableSearchButton: false,
       loadingPage: true,
     };
@@ -34,11 +34,12 @@ export default class MatchDetailPage extends Component {
       name: params.name,
       matchId: params.matchId,
       summonerServer: params.server,
+      server: params.server,
     });
 
     fetch(
-      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
-      // `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=10`
+      // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
+      `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=10`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -46,8 +47,8 @@ export default class MatchDetailPage extends Component {
           summonerBasicInfo: result,
         });
         return fetch(
-          `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
-          // `https://localhost:44303/api/${params.server}/matches/${params.matchId}`
+          // `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
+          `https://localhost:44303/api/${params.server}/matches/${params.matchId}`
         );
       })
       .then((res) => res.json())

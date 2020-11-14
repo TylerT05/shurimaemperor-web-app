@@ -48,7 +48,7 @@ const SummonerBasicInfo = ({ info, server }) => (
             Last played: {Moment(info.lastPlayed).fromNow()}
           </p>
           <p className="text-secondary text-left">
-            Server:{" "}
+            Region:{" "}
             {server === "na1"
               ? "North America"
               : server === "kr"

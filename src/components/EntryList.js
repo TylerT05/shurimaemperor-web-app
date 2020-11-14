@@ -14,7 +14,18 @@ const EntriesList = ({ entries }) => (
           {entries === null ? (
             <tr>
               <td>
-                <p>Unranked</p>
+                <div className="row" style={{ height: 100 }}>
+                  <div className="col-3">
+                    <img
+                      src={"/ranked-emblems/unranked.png"}
+                      style={{ width: 100 }}
+                      alt="tier icon"
+                    />
+                  </div>
+                  <div className="col-9">
+                    <h4 style={{ marginTop: 34 }}>Unranked</h4>
+                  </div>
+                </div>
               </td>
             </tr>
           ) : (
@@ -38,7 +49,7 @@ const EntriesList = ({ entries }) => (
                       {entry.queueType === "RANKED_SOLO_5x5" ? (
                         <p>Ranked Solo/Duo</p>
                       ) : entry.queueType === "RANKED_FLEX_SR" ? (
-                        <p>Ranked Flex</p>
+                        <p>Ranked Team 5x5</p>
                       ) : (
                         ""
                       )}
