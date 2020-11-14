@@ -234,7 +234,7 @@ export default class MatchDetailPage extends Component {
               teams={this.state.teams}
               participantsTeam1={this.state.participantsTeam1}
               participantsTeam2={this.state.participantsTeam2}
-              server={this.state.server}
+              server={this.state.summonerServer}
             />
           </div>
         )}
