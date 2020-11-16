@@ -2,7 +2,12 @@ import React from "react";
 import Moment from "moment";
 import queues from "../data/en_US/queues.json";
 
-const MatchBasicInfo = ({ summonerBasicInfo, participants, match, server }) => (
+const MatchDetailBasicInfo = ({
+  summonerBasicInfo,
+  participants,
+  match,
+  server,
+}) => (
   <div className="container" style={{ marginBottom: 40 }}>
     <div className="shadow bg-dark card">
       <div className="card-body text-center">
@@ -176,4 +181,4 @@ const MatchBasicInfo = ({ summonerBasicInfo, participants, match, server }) => (
   </div>
 );
 
-export default MatchBasicInfo;
+export default MatchDetailBasicInfo;

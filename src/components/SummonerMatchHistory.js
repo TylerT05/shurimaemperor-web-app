@@ -3,7 +3,7 @@ import Moment from "moment";
 import champions from "../data/en_US/championFull.json";
 import queues from "../data/en_US/queues.json";
 
-const MatchesList = ({ matches, basicInfo, server }) => (
+const SummonerMatchHistory = ({ matches, basicInfo, server }) => (
   <table className="card-text table table-dark table-striped small">
     <tbody>
       {matches.map((match, key) => (
@@ -110,4 +110,4 @@ const MatchesList = ({ matches, basicInfo, server }) => (
   </table>
 );
 
-export default MatchesList;
+export default SummonerMatchHistory;

@@ -1,7 +1,7 @@
 import React from "react";
-import BanList from "./BanList";
-import Overview from "./Overview";
-import AdvancedStats from "./AdvancedStats";
+import Bans from "./MatchDetailBans";
+import Overview from "./MatchDetailOverview";
+import AdvancedStats from "./MatchDetailAdvancedStats";
 
 const MatchDetail = ({
   bans,
@@ -48,7 +48,7 @@ const MatchDetail = ({
             Gold Graph
           </a>
         </li> */}
-        <BanList bans={bans} />
+        <Bans bans={bans} />
       </ul>
       <div class="tab-content">
         <div id="overview" class="container tab-pane active">

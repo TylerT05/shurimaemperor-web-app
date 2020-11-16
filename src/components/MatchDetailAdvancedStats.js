@@ -2,7 +2,7 @@ import React from "react";
 import champions from "../data/en_US/championFull.json";
 import { FaCheck } from "react-icons/fa";
 
-const AdvancedStats = ({
+const MatchDetailAdvancedStats = ({
   name,
   teams,
   participantsTeam1,
@@ -896,4 +896,4 @@ const AdvancedStats = ({
     </tbody>
   </table>
 );
-export default AdvancedStats;
+export default MatchDetailAdvancedStats;

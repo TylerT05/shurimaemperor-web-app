@@ -1,6 +1,6 @@
 import React from "react";
 
-const SampleList = () => (
+const SampleSummonerName = () => (
   <table className="table table-dark small rounded">
     <thead>
       <tr>
@@ -34,4 +34,4 @@ const SampleList = () => (
   </table>
 );
 
-export default SampleList;
+export default SampleSummonerName;

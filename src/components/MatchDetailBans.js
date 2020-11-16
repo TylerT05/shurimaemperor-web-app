@@ -1,7 +1,7 @@
 import React from "react";
 import champions from "../data/en_US/championFull.json";
 
-const BanList = ({ bans }) => (
+const MatchDetailBans = ({ bans }) => (
   <li class="nav-item ml-auto">
     <div>
       {bans.map((b) =>
@@ -49,4 +49,4 @@ const BanList = ({ bans }) => (
   </li>
 );
 
-export default BanList;
+export default MatchDetailBans;

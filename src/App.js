@@ -5,6 +5,7 @@ import AboutPage from "./pages/AboutPage";
 import ContactPage from "./pages/ContactPage";
 import SummonerPage from "./pages/SummonerPage";
 import MatchDetailPage from "./pages/MatchDetailPage";
+import LeaderBoardPage from "./pages/LeaderBoardPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
 
@@ -24,6 +25,10 @@ function App() {
             <Route
               path="/:server/matchdetail/:name/:matchId"
               component={MatchDetailPage}
+            />
+            <Route
+              path="/:server/leaderboard/:queue/:tier/:division/"
+              component={LeaderBoardPage}
             />
             <Route component={NotFoundPage} />
           </Switch>

@@ -3,7 +3,7 @@ import champions from "../data/en_US/championFull.json";
 import summoner from "../data/en_US/summoner.json";
 import allRunes from "../data/en_US/runesReforged.json";
 
-const ParticipantList = ({
+const MatchDetailOverviewParticipants = ({
   name,
   participants,
   gameDuration,
@@ -246,4 +246,4 @@ const ParticipantList = ({
     </tr>
   ));
 
-export default ParticipantList;
+export default MatchDetailOverviewParticipants;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import SampleList from "../components/SampleList";
+import SampleSummonerNames from "../components/SampleSummonerNames";
 
 export default class HomePage extends Component {
   constructor(props) {
@@ -35,8 +35,8 @@ export default class HomePage extends Component {
 
     if (this.state.summonerName !== "") {
       fetch(
-        // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
-        `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        // `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -87,10 +87,10 @@ export default class HomePage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
-                  to="/about"
+                  to="/na1/leaderboard/RANKED_SOLO_5x5/CHALLENGER/I"
                   style={{ marginLeft: 14 }}
                 >
-                  About
+                  Leader Board
                 </Link>
               </li>
               <li className="nav-item">
@@ -192,7 +192,7 @@ export default class HomePage extends Component {
                 style={{ margin: "auto", width: 600, marginTop: 40 }}
               >
                 <p>Sample Summoner Names</p>
-                <SampleList></SampleList>
+                <SampleSummonerNames />
                 <p className="text-secondary">
                   *All summoner names above are real for each region.*
                 </p>

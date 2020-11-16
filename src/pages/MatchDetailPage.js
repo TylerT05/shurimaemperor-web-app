@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import MatchBasicInfo from "../components/MatchBasicInfo";
+import MatchDetailBasicInfo from "../components/MatchDetailBasicInfo";
 import MatchDetail from "../components/MatchDetail";
 
 export default class MatchDetailPage extends Component {
@@ -38,8 +38,8 @@ export default class MatchDetailPage extends Component {
     });
 
     fetch(
-      // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
-      `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=10`
+      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=10`
+      // `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=10`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -47,8 +47,8 @@ export default class MatchDetailPage extends Component {
           summonerBasicInfo: result,
         });
         return fetch(
-          // `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
-          `https://localhost:44303/api/${params.server}/matches/${params.matchId}`
+          `https://shurimaemperorapimatches.azurewebsites.net/api/${params.server}/matches/${params.matchId}`
+          // `https://localhost:44303/api/${params.server}/matches/${params.matchId}`
         );
       })
       .then((res) => res.json())
@@ -135,10 +135,10 @@ export default class MatchDetailPage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
-                  to="/about"
+                  to="/na1/leaderboard/RANKED_SOLO_5x5/CHALLENGER/I"
                   style={{ marginLeft: 14 }}
                 >
-                  About
+                  Leader Board
                 </Link>
               </li>
               <li className="nav-item">
@@ -222,7 +222,7 @@ export default class MatchDetailPage extends Component {
             className="container"
             style={{ marginTop: 60, marginBottom: 40 }}
           >
-            <MatchBasicInfo
+            <MatchDetailBasicInfo
               match={this.state.match}
               participants={this.state.participants}
               summonerBasicInfo={this.state.summonerBasicInfo}

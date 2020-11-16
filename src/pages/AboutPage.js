@@ -84,10 +84,10 @@ export default class AboutPage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
-                  to="/about"
+                  to="/na1/leaderboard/RANKED_SOLO_5x5/CHALLENGER/I"
                   style={{ marginLeft: 14 }}
                 >
-                  About
+                  Leader Board
                 </Link>
               </li>
               <li className="nav-item">

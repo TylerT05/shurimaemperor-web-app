@@ -1,6 +1,6 @@
 import React from "react";
 
-const EntriesList = ({ entries }) => (
+const SummonerEntries = ({ entries }) => (
   <div
     className="card shadow bg-dark"
     style={{
@@ -86,4 +86,4 @@ const EntriesList = ({ entries }) => (
   </div>
 );
 
-export default EntriesList;
+export default SummonerEntries;

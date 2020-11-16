@@ -1,7 +1,7 @@
 import React from "react";
-import ParticipantList from "./ParticipantList";
+import Participants from "./MatchDetailOverviewParticipants";
 
-const TeamInfo = ({
+const MatchDetailOverview = ({
   name,
   teams,
   participantsTeam1,
@@ -76,7 +76,7 @@ const TeamInfo = ({
       </thead>
       <tbody>
         {t.teamId === 100 ? (
-          <ParticipantList
+          <Participants
             name={name}
             participants={participantsTeam1}
             gameDuration={gameDuration}
@@ -84,7 +84,7 @@ const TeamInfo = ({
             server={server}
           />
         ) : (
-          <ParticipantList
+          <Participants
             name={name}
             participants={participantsTeam2}
             gameDuration={gameDuration}
@@ -96,4 +96,4 @@ const TeamInfo = ({
     </table>
   ));
 
-export default TeamInfo;
+export default MatchDetailOverview;

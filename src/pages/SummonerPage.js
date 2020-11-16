@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import MatchList from "../components/MatchList";
-import EntryList from "../components/EntryList";
-import BasicInfo from "../components/SummonerBasicInfo";
+import SummonerMatchHistory from "../components/SummonerMatchHistory";
+import SummonerEntries from "../components/SummonerEntries";
+import SummonerBasicInfo from "../components/SummonerBasicInfo";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
@@ -38,8 +38,8 @@ export default class SummonerPage extends Component {
     });
 
     fetch(
-      // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
-      `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
+      `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
+      // `https://localhost:44355/api/summoners/${params.server}/${params.name}?index=${this.state.index}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -57,8 +57,8 @@ export default class SummonerPage extends Component {
   componentDidUpdate(prevProps, prevState) {
     if (prevState.index !== this.state.index) {
       fetch(
-        // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
-        `https://localhost:44355/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
+        // `https://localhost:44355/api/summoners/${this.state.summonerServer}/${this.state.summonerInfo.name}?index=${this.state.index}`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -144,10 +144,10 @@ export default class SummonerPage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
-                  to="/about"
+                  to="/na1/leaderboard/RANKED_SOLO_5x5/CHALLENGER/I"
                   style={{ marginLeft: 14 }}
                 >
-                  About
+                  Leader Board
                 </Link>
               </li>
               <li className="nav-item">
@@ -233,16 +233,16 @@ export default class SummonerPage extends Component {
           >
             <div className="row">
               <div className="col-md-6">
-                <BasicInfo
+                <SummonerBasicInfo
                   info={this.state.summonerInfo}
                   server={this.state.summonerServer}
                 />
               </div>
               <div className="col-md-6">
                 {this.state.leagueEntries && this.state.leagueEntries.length ? (
-                  <EntryList entries={this.state.leagueEntries} />
+                  <SummonerEntries entries={this.state.leagueEntries} />
                 ) : (
-                  <EntryList entries={null} />
+                  <SummonerEntries entries={null} />
                 )}
               </div>
             </div>
@@ -258,7 +258,7 @@ export default class SummonerPage extends Component {
                   </span>
                 </div>
                 <div className="card-body text-center">
-                  <MatchList
+                  <SummonerMatchHistory
                     basicInfo={this.state.summonerInfo}
                     matches={this.state.matches}
                     server={this.state.summonerServer}
