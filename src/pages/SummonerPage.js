@@ -153,6 +153,15 @@ export default class SummonerPage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
+                  to="/items"
+                  style={{ marginLeft: 14 }}
+                >
+                  Items
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link h6 text-white"
                   to="/contact"
                   style={{ marginLeft: 14 }}
                 >
@@ -189,7 +198,7 @@ export default class SummonerPage extends Component {
                   <div
                     className="input-group border border-dark rounded"
                     style={{
-                      width: 400,
+                      width: 360,
                     }}
                   >
                     <input

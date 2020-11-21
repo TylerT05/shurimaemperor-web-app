@@ -6,8 +6,10 @@ import ContactPage from "./pages/ContactPage";
 import SummonerPage from "./pages/SummonerPage";
 import MatchDetailPage from "./pages/MatchDetailPage";
 import LeaderBoardPage from "./pages/LeaderBoardPage";
+import ItemPage from "./pages/ItemPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import "./App.css";
+import "./view.css";
 
 function App() {
   return (
@@ -30,6 +32,7 @@ function App() {
               path="/:server/leaderboard/:queue/:tier/:division/"
               component={LeaderBoardPage}
             />
+            <Route path="/items" component={ItemPage} />
             <Route component={NotFoundPage} />
           </Switch>
         </div>

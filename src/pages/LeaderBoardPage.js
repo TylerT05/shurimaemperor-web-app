@@ -137,8 +137,8 @@ export default class LeaderBoardPage extends Component {
 
     if (this.state.summonerName !== "") {
       fetch(
-        // `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
-        `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        `https://shurimaemperorapisummoners.azurewebsites.net/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
+        // `https://localhost:44355/api/summoners/${this.state.server}/verify/${this.state.summonerName}`
       )
         .then((res) => res.json())
         .then((result) => {
@@ -196,6 +196,15 @@ export default class LeaderBoardPage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
+                  to="/items"
+                  style={{ marginLeft: 14 }}
+                >
+                  Items
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link h6 text-white"
                   to="/contact"
                   style={{ marginLeft: 14 }}
                 >
@@ -232,7 +241,7 @@ export default class LeaderBoardPage extends Component {
                   <div
                     className="input-group border border-dark rounded"
                     style={{
-                      width: 400,
+                      width: 360,
                     }}
                   >
                     <input
@@ -268,7 +277,9 @@ export default class LeaderBoardPage extends Component {
               style={{ marginTop: 10, marginBottom: 10 }}
             >
               <div className="card-header border-0 text-white">
-                <h2>Top 100</h2>
+                <h2>
+                  LeaderBoard <span className="text-secondary">(Top 100)</span>
+                </h2>
               </div>
               <div className="card-body text-center">
                 <table className="card-text table table-dark table-striped small">

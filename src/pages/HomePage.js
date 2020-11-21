@@ -96,6 +96,15 @@ export default class HomePage extends Component {
               <li className="nav-item">
                 <Link
                   className="nav-link h6 text-white"
+                  to="/items"
+                  style={{ marginLeft: 14 }}
+                >
+                  Items
+                </Link>
+              </li>
+              <li className="nav-item">
+                <Link
+                  className="nav-link h6 text-white"
                   to="/contact"
                   style={{ marginLeft: 14 }}
                 >
