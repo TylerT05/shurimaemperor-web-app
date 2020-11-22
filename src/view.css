@@ -103,7 +103,8 @@
 }
 
 .rg-box-modal {
-  width: 400px;
+  min-height: 440px;
+  /* width: 400px; */
   padding: 7px;
   background: transparent url("./bg/F5141416.png");
   background: none rgba(20, 20, 22, 0.96);
@@ -118,12 +119,12 @@
 }
 
 .rg-box-modal.rg-display-item_modal {
-  height: 1260px;
-  width: 352px;
+  min-height: 440px;
+  /* width: 352px; */
 }
 .rg-box-modal.rg-display-item_modal .item-into {
-  height: 178px;
-  width: 336px;
+  min-height: 100px;
+  /* width: 336px; */
   padding: 6px;
   border: 1.15px solid #686868;
   border-radius: 4px;
@@ -137,7 +138,7 @@
 .rg-box-modal.rg-display-item_modal .rg-item-tree {
   margin-top: 6px;
   height: 190px;
-  width: 336px;
+  /* width: 336px; */
   padding: 6px;
   border: 1.15px solid #686868;
   border-radius: 4px;
@@ -146,8 +147,8 @@
 }
 .rg-box-modal.rg-display-item_modal .item-desc {
   margin-top: 6px;
-  height: 860px;
-  width: 336px;
+  min-height: 120px;
+  /* width: 336px; */
   padding: 6px;
   border: 1.15px solid #686868;
   border-radius: 4px;
@@ -179,7 +180,7 @@
   color: #d8ad00;
 }
 .rg-box-modal.rg-display-item_modal .item-desc .description {
-  height: 760px;
+  /* height: 760px; */
   margin-top: 6px;
   font-size: 0.9em;
   line-height: 1.15em;
@@ -187,7 +188,7 @@
 }
 
 .rg-box-tooltip {
-  width: 295px;
+  /* width: 295px; */
   padding: 7px;
   background: transparent url("./bg/F5141416.png");
   background: none rgba(20, 20, 22, 0.96);
@@ -210,7 +211,7 @@
 .rg-box-tooltip .info {
   /* float: left; */
   margin-left: 5px;
-  width: 240px;
+  width: 180px;
 }
 .rg-box-tooltip .info .name {
   /* float: left; */

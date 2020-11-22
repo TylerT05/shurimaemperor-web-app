@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { Markup } from "interweave";
-import ItemTree from "../components/ItemTree";
+import ItemFilter from "../components/ItemFilter";
 import allItems from "../data/en_US/item.json";
-import itemCategory from "../data/en_US/item-category.json";
 
 export default class ItemPage extends Component {
   constructor(props) {
@@ -13,14 +11,11 @@ export default class ItemPage extends Component {
     this.onChange = this.onChange.bind(this);
     this.onSearch = this.onSearch.bind(this);
     this.onClick = this.onClick.bind(this);
+    this.onFilter = this.onFilter.bind(this);
 
     this.state = {
-      items: [],
+      filters: [],
       selectedItem: "",
-      from: [],
-      into: [],
-      gold: [],
-      image: [],
       error: "",
       server: "na1",
       disableSearchButton: false,
@@ -31,18 +26,30 @@ export default class ItemPage extends Component {
 
   componentDidMount() {
     this.setState({
-      items: allItems,
+      filter: [],
     });
+  }
+
+  onFilter(e) {
+    e.preventDefault();
+    // if (this.state.filters.includes(e.target.id)) {
+    //   this.setState({
+    //     filters: this.state.filters.splice(
+    //       this.state.filters.indexOf(e.target.id),
+    //       1
+    //     ),
+    //   });
+    // } else {
+    //   this.setState({
+    //     filters: this.state.filters.concat(e.target.id),
+    //   });
+    // }
   }
 
   onClick(e) {
     e.preventDefault();
     this.setState({
       selectedItem: e.target.id,
-      from: allItems["data"][e.target.id]["from"],
-      into: allItems["data"][e.target.id]["into"],
-      gold: allItems["data"][e.target.id]["gold"],
-      image: allItems["data"][e.target.id]["image"],
     });
   }
 
@@ -206,455 +213,74 @@ export default class ItemPage extends Component {
                 <h2 className="wrap-ceil">
                   Items{" "}
                   <span className="text-secondary">
-                    (Patch {this.state.items["version"]})
+                    (Patch {allItems.version})
                   </span>
                 </h2>
               </div>
               <div className="card-body text-center">
                 <div className="row">
-                  <div className="col text-white text-left rg-box-modal">
-                    <p>All Items</p>
-                    {/* <p>Attack Damage</p>
-                    <p>Critical Strike</p>
-                    <p>Attack Speed</p>
-                    <p>On-hit Effects</p>
-                    <p>Armor Penetration</p>
-                    <p>Ability Power</p>
-                    <p>Mana &amp; Regeneration</p>
-                    <p>Magic Penetration</p>
-                    <p>Health &amp; Regeneration</p>
-                    <p>Armor</p>
-                    <p>Magic Resistance</p>
-                    <p>Ability Haste</p>
-                    <p>Movement</p>
-                    <p>Life Steal &amp; Vamp</p> */}
+                  <div
+                    className="col-3 text-white text-left rg-box-modal small"
+                    style={{ marginLeft: 10, minHeight: 1200 }}
+                  >
+                    <button
+                      style={{
+                        padding: 0,
+                        border: "none",
+                        background: "none",
+                      }}
+                    >
+                      <h6
+                        className={
+                          this.state.filters.includes("ALL")
+                            ? "text-warning"
+                            : "text-light"
+                        }
+                        onClick={this.onFilter}
+                        id="ALL"
+                        style={{ marginTop: 12 }}
+                      >
+                        All Items
+                      </h6>
+                    </button>
+                    {allItems["tree"].map((h) => (
+                      <div>
+                        <hr className="bg-light" />
+                        <h6 className="text-secondary">
+                          {h.header.charAt(0) +
+                            h.header.slice(1).toLowerCase() +
+                            ":"}
+                        </h6>
+                        {h.tags.map((t) => (
+                          <div>
+                            <button
+                              style={{
+                                padding: 0,
+                                border: "none",
+                                background: "none",
+                              }}
+                              disabled
+                            >
+                              <h6
+                                className={
+                                  this.state.filters.includes(t)
+                                    ? "text-warning"
+                                    : "text-secondary"
+                                }
+                                onClick={this.onFilter}
+                                id={t}
+                                style={{ marginLeft: 6 }}
+                              >
+                                {t.charAt(0) + t.slice(1).toLowerCase()}
+                              </h6>
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    ))}
                   </div>
                   <div className="col">
-                    <div className="rg-box-modal rg-display-item_modal">
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Consumable:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["consumable"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Boots:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["boots"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Starter:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["starter"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Basic:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["basic"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Epic:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["epic"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Legendary:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["legendary"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                      <div style={{ marginTop: 12 }}>
-                        <h6>Mythic:</h6>
-                        {Object.keys(allItems["data"]).map((i) =>
-                          itemCategory["mythic"].includes(
-                            allItems["data"][i].name
-                          ) &&
-                          allItems["data"][i]["maps"]["11"] &&
-                          allItems["data"][i].inStore == null &&
-                          allItems["data"][i].requiredChampion == null &&
-                          allItems["data"][i].hideFromAll !== true &&
-                          allItems["data"][i]["gold"].purchasable === true ? (
-                            <div className="rg-tooltip" style={{ margin: 4 }}>
-                              <img
-                                id={i}
-                                onClick={this.onClick}
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][i]["image"]["full"]
-                                }
-                                alt="item icon"
-                                style={{ width: 34 }}
-                              />
-                              <div className="rg-tooltip-content">
-                                <div className="rg-box-tooltip">
-                                  <div className="info">
-                                    <div className="name">
-                                      {allItems["data"][i].name}
-                                    </div>
-                                    <div className="cost">
-                                      <div className="gold">
-                                        {allItems["data"][i]["gold"].total}
-                                      </div>
-                                    </div>
-                                    <div className="description">
-                                      <Markup
-                                        content={
-                                          allItems["data"][i].description
-                                        }
-                                      />
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            ""
-                          )
-                        )}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="col">
-                    <div className="rg-box-modal rg-display-item_modal">
-                      {this.state.selectedItem !== "" ? (
-                        <div>
-                          <div className="item-into">
-                            <h6>Builds Into:</h6>
-                            {allItems["data"][this.state.selectedItem][
-                              "into"
-                            ] != null
-                              ? allItems["data"][this.state.selectedItem][
-                                  "into"
-                                ].map((i) =>
-                                  allItems["data"][i]["maps"]["11"] &&
-                                  allItems["data"][i].inStore == null &&
-                                  allItems["data"][i].requiredChampion ==
-                                    null &&
-                                  allItems["data"][i].hideFromAll !== true &&
-                                  allItems["data"][i]["gold"].purchasable ===
-                                    true ? (
-                                    <img
-                                      className="img"
-                                      id={i}
-                                      onClick={this.onClick}
-                                      src={
-                                        "/img/item/" +
-                                        allItems["data"][i]["image"]["full"]
-                                      }
-                                      style={{ width: 34 }}
-                                      alt="item icon"
-                                    />
-                                  ) : (
-                                    ""
-                                  )
-                                )
-                              : ""}
-                          </div>
-                          <div className="rg-item-tree">
-                            <div className="treebox" style={{ marginTop: 10 }}>
-                              <ItemTree id={this.state.selectedItem} />
-                            </div>
-                          </div>
-                          <div className="item-desc">
-                            <div className="title" style={{ margin: 10 }}>
-                              <img
-                                src={
-                                  "/img/item/" +
-                                  allItems["data"][this.state.selectedItem][
-                                    "image"
-                                  ]["full"]
-                                }
-                                alt="item icon"
-                              />
-                              <div className="name">
-                                {allItems["data"][this.state.selectedItem].name}
-                              </div>
-                              <div className="cost">
-                                <div className="gold">
-                                  {
-                                    allItems["data"][this.state.selectedItem][
-                                      "gold"
-                                    ].total
-                                  }
-                                </div>
-                              </div>
-                            </div>
-                            <div className="description" style={{ margin: 10 }}>
-                              <Markup
-                                content={
-                                  allItems["data"][this.state.selectedItem]
-                                    .description
-                                }
-                              />
-                            </div>
-                          </div>
-                        </div>
-                      ) : (
-                        ""
-                      )}
-                    </div>
+                    <ItemFilter filters={this.state.filters} />
                   </div>
                 </div>
               </div>

@@ -1,4 +1,26 @@
 {
+  "consumable": [
+    "Health Potion",
+    "Refillable Potion",
+    "Corrupting Potion",
+    "Stealth Ward",
+    "Oracle Lens",
+    "Farsight Alteration",
+    "Elixir of Sorcery",
+    "Elixir of Wrath",
+    "Elixir of Iron",
+    "Control Ward"
+  ],
+  "boots": [
+    "Boots",
+    "Ionian Boots of Lucidity",
+    "Boots of Swiftness",
+    "Sorcerer's Shoes",
+    "Berserker's Greaves",
+    "Mobility Boots",
+    "Mercury's Treads",
+    "Plated Steelcaps"
+  ],
   "starter": [
     "Emberknife",
     "Hailblade",
@@ -160,27 +182,5 @@
     "Galeforce",
     "Kraken Slayer",
     "Immortal Shieldbow"
-  ],
-  "boots": [
-    "Boots",
-    "Ionian Boots of Lucidity",
-    "Boots of Swiftness",
-    "Sorcerer's Shoes",
-    "Berserker's Greaves",
-    "Mobility Boots",
-    "Mercury's Treads",
-    "Plated Steelcaps"
-  ],
-  "consumable": [
-    "Health Potion",
-    "Refillable Potion",
-    "Corrupting Potion",
-    "Stealth Ward",
-    "Oracle Lens",
-    "Farsight Alteration",
-    "Elixir of Sorcery",
-    "Elixir of Wrath",
-    "Elixir of Iron",
-    "Control Ward"
   ]
 }
