@@ -76,6 +76,7 @@ export default class ItemFilter extends Component {
         NonbootsMovement: this.props.NONBOOTSMOVEMENT,
         MagicPenetration: this.props.MAGICPENETRATION,
         ArmorPenetration: this.props.ARMORPENETRATION,
+        OnHit: this.props.ONHIT,
         SpellVamp: this.props.SPELLVAMP,
       });
     }
@@ -106,21 +107,7 @@ export default class ItemFilter extends Component {
     if (this.state.OnHit) filter.push(true);
     var included = [];
     allItems["data"][id]["tags"].map((i) =>
-      i === "Mana" || i === "ManaRegen"
-        ? this.state[i]
-          ? included.push(true)
-          : null
-        : i === "Health" || i === "HealthRegen"
-        ? this.state[i]
-          ? included.push(true)
-          : null
-        : i === "LifeSteal" || i === "SpellVamp"
-        ? this.state[i]
-          ? included.push(true)
-          : null
-        : this.state[i]
-        ? included.push(true)
-        : null
+      this.state[i] ? included.push(true) : null
     );
     return included.length >= filter.length ? (
       <div className="rg-tooltip" style={{ margin: 4 }}>
