@@ -37,46 +37,44 @@ export default class ItemBuildInto extends Component {
 
   render() {
     return (
-      <div className="col-6">
-        <div className="rg-box-modal rg-display-item_modal">
-          <div className="item-into">
-            <h6>Builds Into:</h6>
-            {this.state.selectedItem !== ""
-              ? allItems["data"][this.state.selectedItem]["into"] != null
-                ? allItems["data"][this.state.selectedItem]["into"].map((i) =>
-                    allItems["data"][i]["maps"]["11"] &&
-                    allItems["data"][i].inStore == null &&
-                    allItems["data"][i].requiredChampion == null &&
-                    allItems["data"][i].hideFromAll !== true &&
-                    allItems["data"][i]["gold"].purchasable === true ? (
-                      <button
-                        style={{
-                          padding: 0,
-                          border: "none",
-                          background: "none",
-                        }}
-                      >
-                        <img
-                          className="img"
-                          id={i}
-                          onClick={this.onClick}
-                          src={
-                            "/img/item/" + allItems["data"][i]["image"]["full"]
-                          }
-                          style={{ width: 34 }}
-                          alt="item icon"
-                        />
-                      </button>
-                    ) : (
-                      ""
-                    )
+      <div className="rg-box-modal rg-display-item_modal">
+        <div className="item-into">
+          <h6>Builds Into:</h6>
+          {this.state.selectedItem !== ""
+            ? allItems["data"][this.state.selectedItem]["into"] != null
+              ? allItems["data"][this.state.selectedItem]["into"].map((i) =>
+                  allItems["data"][i]["maps"]["11"] &&
+                  allItems["data"][i].inStore == null &&
+                  allItems["data"][i].requiredChampion == null &&
+                  allItems["data"][i].hideFromAll !== true &&
+                  allItems["data"][i]["gold"].purchasable === true ? (
+                    <button
+                      style={{
+                        padding: 0,
+                        border: "none",
+                        background: "none",
+                      }}
+                    >
+                      <img
+                        className="img"
+                        id={i}
+                        onClick={this.onClick}
+                        src={
+                          "/img/item/" + allItems["data"][i]["image"]["full"]
+                        }
+                        style={{ width: 34 }}
+                        alt="item icon"
+                      />
+                    </button>
+                  ) : (
+                    ""
                   )
-                : ""
-              : ""}
-          </div>
-
-          <ItemTree selectedItem={this.state.selectedItem} />
+                )
+              : ""
+            : ""}
         </div>
+
+        <ItemTree selectedItem={this.state.selectedItem} />
       </div>
     );
   }

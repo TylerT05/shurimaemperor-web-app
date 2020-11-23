@@ -53,7 +53,11 @@ export default class ItemTree extends Component {
                   }}
                 >
                   <img
-                    className="treeimg"
+                    className={
+                      this.state.subSelectedItem === this.state.selectedItem
+                        ? "treeimg selected"
+                        : "treeimg"
+                    }
                     id={this.state.selectedItem}
                     onClick={this.onClick}
                     src={
@@ -99,7 +103,11 @@ export default class ItemTree extends Component {
                               }}
                             >
                               <img
-                                className="treeimg"
+                                className={
+                                  this.state.subSelectedItem === i
+                                    ? "treeimg selected"
+                                    : "treeimg"
+                                }
                                 id={i}
                                 onClick={this.onClick}
                                 src={
@@ -149,7 +157,11 @@ export default class ItemTree extends Component {
                                         }}
                                       >
                                         <img
-                                          className="treeimg"
+                                          className={
+                                            this.state.subSelectedItem === ii
+                                              ? "treeimg selected"
+                                              : "treeimg"
+                                          }
                                           id={ii}
                                           onClick={this.onClick}
                                           src={
@@ -201,7 +213,11 @@ export default class ItemTree extends Component {
                                         }}
                                       >
                                         <img
-                                          className="treeimg"
+                                          className={
+                                            this.state.subSelectedItem === ii
+                                              ? "treeimg selected"
+                                              : "treeimg"
+                                          }
                                           id={ii}
                                           onClick={this.onClick}
                                           src={
@@ -234,7 +250,11 @@ export default class ItemTree extends Component {
                                     }}
                                   >
                                     <img
-                                      className="treeimg"
+                                      className={
+                                        this.state.subSelectedItem === ii
+                                          ? "treeimg selected"
+                                          : "treeimg"
+                                      }
                                       id={ii}
                                       onClick={this.onClick}
                                       src={
@@ -286,7 +306,11 @@ export default class ItemTree extends Component {
                               }}
                             >
                               <img
-                                className="treeimg"
+                                className={
+                                  this.state.subSelectedItem === i
+                                    ? "treeimg selected"
+                                    : "treeimg"
+                                }
                                 id={i}
                                 onClick={this.onClick}
                                 src={
@@ -336,7 +360,11 @@ export default class ItemTree extends Component {
                                         }}
                                       >
                                         <img
-                                          className="treeimg"
+                                          className={
+                                            this.state.subSelectedItem === ii
+                                              ? "treeimg selected"
+                                              : "treeimg"
+                                          }
                                           id={ii}
                                           onClick={this.onClick}
                                           src={
@@ -388,7 +416,11 @@ export default class ItemTree extends Component {
                                         }}
                                       >
                                         <img
-                                          className="treeimg"
+                                          className={
+                                            this.state.subSelectedItem === ii
+                                              ? "treeimg selected"
+                                              : "treeimg"
+                                          }
                                           id={ii}
                                           onClick={this.onClick}
                                           src={
@@ -421,7 +453,11 @@ export default class ItemTree extends Component {
                                     }}
                                   >
                                     <img
-                                      className="treeimg"
+                                      className={
+                                        this.state.subSelectedItem === ii
+                                          ? "treeimg selected"
+                                          : "treeimg"
+                                      }
                                       id={ii}
                                       onClick={this.onClick}
                                       src={
@@ -461,7 +497,11 @@ export default class ItemTree extends Component {
                             }}
                           >
                             <img
-                              className="treeimg"
+                              className={
+                                this.state.subSelectedItem === i
+                                  ? "treeimg selected"
+                                  : "treeimg"
+                              }
                               id={i}
                               onClick={this.onClick}
                               src={
@@ -511,7 +551,11 @@ export default class ItemTree extends Component {
                                       }}
                                     >
                                       <img
-                                        className="treeimg"
+                                        className={
+                                          this.state.subSelectedItem === ii
+                                            ? "treeimg selected"
+                                            : "treeimg"
+                                        }
                                         id={ii}
                                         onClick={this.onClick}
                                         src={
@@ -561,7 +605,11 @@ export default class ItemTree extends Component {
                                       }}
                                     >
                                       <img
-                                        className="treeimg"
+                                        className={
+                                          this.state.subSelectedItem === ii
+                                            ? "treeimg selected"
+                                            : "treeimg"
+                                        }
                                         id={ii}
                                         onClick={this.onClick}
                                         src={
@@ -592,7 +640,11 @@ export default class ItemTree extends Component {
                                   }}
                                 >
                                   <img
-                                    className="treeimg"
+                                    className={
+                                      this.state.subSelectedItem === ii
+                                        ? "treeimg selected"
+                                        : "treeimg"
+                                    }
                                     id={ii}
                                     onClick={this.onClick}
                                     src={
